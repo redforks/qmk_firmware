@@ -1,0 +1,26 @@
+#include QMK_KEYBOARD_H
+
+enum custom_keycodes {
+    VIM_YANK = SAFE_RANGE,
+    VIM_PASTE,
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    case VIM_YANK:
+        if (record->event.pressed) {
+            SEND_STRING("\"+y");
+        }
+        break;
+
+    case VIM_PASTE:
+        if (record->event.pressed) {
+            SEND_STRING("\"+p");
+        }
+        break;
+
+    }
+    return true;
+};
+
+
