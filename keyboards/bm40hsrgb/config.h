@@ -48,8 +48,14 @@
 #define RGB_DI_PIN E2
 #define DRIVER_LED_TOTAL 53
 #ifdef RGB_DI_PIN
-    #define RGB_MATRIX_KEYPRESSES // reacts to keypresses
+    /* #define RGB_MATRIX_KEYPRESSES // reacts to keypresses */
 #endif
 #ifdef RGB_MATRIX_ENABLE
 #    define RGB_DISABLE_WHEN_USB_SUSPENDED true // turn off effects when suspended
 #endif
+
+/* #define TAPPING_TERM 150 */
+/* #define PERMISSIVE_HOLD */
+/* #define IGNORE_MOD_TAP_INTERRUPT */
+
+#undef RGBLIGHT_ANIMATIONS
