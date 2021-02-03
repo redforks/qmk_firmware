@@ -48,5 +48,11 @@
 #define RGB_DI_PIN E2
 #define DRIVER_LED_TOTAL 53
 #ifdef RGB_DI_PIN
-    #define RGB_MATRIX_KEYPRESSES // reacts to keypresses
+    /* #define RGB_MATRIX_KEYPRESSES // reacts to keypresses */
 #endif
+
+/* #define TAPPING_TERM 150 */
+/* #define PERMISSIVE_HOLD */
+/* #define IGNORE_MOD_TAP_INTERRUPT */
+
+#undef RGBLIGHT_ANIMATIONS
