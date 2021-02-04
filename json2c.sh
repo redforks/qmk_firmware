@@ -4,3 +4,4 @@ docker run --rm -w /qmk_firmware/ -v "$PWD":/qmk_firmware --user $(id -u):$(id -
 
 sed -i 's/HYPR(KC_Y)/VIM_YANK/' ./keyboards/bm40hsrgb/keymaps/my/keymap.c
 sed -i 's/HYPR(KC_P)/VIM_PASTE/' ./keyboards/bm40hsrgb/keymaps/my/keymap.c
+sed -i 's/HYPR(KC_T)/PHP_THIS/' ./keyboards/bm40hsrgb/keymaps/my/keymap.c
