@@ -3,6 +3,7 @@
 enum custom_keycodes {
     VIM_YANK = SAFE_RANGE,
     VIM_PASTE,
+    PHP_THIS,
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -16,6 +17,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case VIM_PASTE:
         if (record->event.pressed) {
             SEND_STRING("\"+p");
+        }
+        break;
+
+    case PHP_THIS:
+        if (record->event.pressed) {
+            SEND_STRING("$this->");
         }
         break;
 
