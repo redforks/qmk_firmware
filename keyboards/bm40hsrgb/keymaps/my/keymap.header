@@ -30,4 +30,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 };
 
+enum combos {
+  PHP_ARROW,
+};
 
+const uint16_t PROGMEM php_arrow_combo[] = {KC_U, KC_H, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+  [PHP_ARROW] = COMBO_ACTION(php_arrow_combo),
+};
+
+void process_combo_event(uint16_t combo_index, bool pressed) {
+  switch(combo_index) {
+    case PHP_ARROW:
+      if (pressed) {
+        SEND_STRING("->");
+      }
+      break;
+  }
+}
