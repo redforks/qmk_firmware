@@ -22,7 +22,6 @@ AUDIO_ENABLE = no           # Audio output
 RGB_MATRIX_ENABLE = yes
 RGB_MATRIX_DRIVER = WS2812
 DEBOUNCE_TYPE = sym_defer_pk
-COMBO_ENABLE = yes
 
 LAYOUTS = planck_mit
 LAYOUTS_HAS_RGB = yes
