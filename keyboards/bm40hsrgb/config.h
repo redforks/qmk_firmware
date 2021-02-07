@@ -54,7 +54,7 @@
 #    define RGB_DISABLE_WHEN_USB_SUSPENDED true // turn off effects when suspended
 #endif
 
-/* #define TAPPING_TERM 150 */
+#define TAPPING_TERM 150
 /* #define PERMISSIVE_HOLD */
 #define IGNORE_MOD_TAP_INTERRUPT
 
