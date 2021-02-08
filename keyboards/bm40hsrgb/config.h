@@ -40,10 +40,10 @@
 #define DEBOUNCE 5
 
 /* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
-#define LOCKING_SUPPORT_ENABLE
+/* #define LOCKING_SUPPORT_ENABLE */
 
 /* Locking resynchronize hack */
-#define LOCKING_RESYNC_ENABLE
+/* #define LOCKING_RESYNC_ENABLE */
 
 #define RGB_DI_PIN E2
 #define DRIVER_LED_TOTAL 53
@@ -51,7 +51,7 @@
     /* #define RGB_MATRIX_KEYPRESSES // reacts to keypresses */
 #endif
 
-#define TAPPING_TERM 150
+#define TAPPING_TERM 130
 /* #define PERMISSIVE_HOLD */
 #define IGNORE_MOD_TAP_INTERRUPT
 
