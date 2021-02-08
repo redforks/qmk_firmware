@@ -81,6 +81,13 @@ const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {13, 1, HSV_OFF}
 );
 
+const rgblight_segment_t PROGMEM my_layer5_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {13, 4, HSV_OFF},
+    {19, 4, HSV_OFF},
+    {23, 1, HSV_RED},
+    {41, 1, HSV_PURPLE}
+);
+
 const rgblight_segment_t PROGMEM my_layer6_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {7, 3, MY_HSV_GREEN},
     {13, 4, HSV_OFF},
@@ -97,7 +104,7 @@ const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
     my_layer2_layer,
     my_layer3_layer,
     my_layer3_layer,
-    my_layer3_layer,
+    my_layer5_layer,
     my_layer6_layer
 );
 
@@ -114,6 +121,7 @@ layer_state_t default_layer_state_set_user(layer_state_t state) {
 layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(1, layer_state_cmp(state, 1));
     rgblight_set_layer_state(2, layer_state_cmp(state, 2));
+    rgblight_set_layer_state(5, layer_state_cmp(state, 5));
     rgblight_set_layer_state(6, layer_state_cmp(state, 6));
     return state;
 }
@@ -131,7 +139,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[2] = LAYOUT_planck_mit(KC_LALT, KC_F1, KC_F2, KC_F3, KC_F4, PHP_SELF, KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_NO, KC_NO, KC_RCTL, KC_F5, KC_F6, KC_F7, KC_F8, PHP_THIS, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_NO, KC_NO, KC_RSFT, KC_F9, KC_F10, KC_F11, KC_F12, PHP_ARROW, KC_NO, VIM_YANK, VIM_PASTE, KC_DEL, KC_INS, KC_RSFT, KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS, KC_NO, KC_TRNS, KC_NO, KC_NO, KC_NO, KC_RCTL),
 	[3] = LAYOUT_planck_mit(SGUI(KC_Q), LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5), LGUI(KC_6), LGUI(KC_7), LGUI(KC_8), LGUI(KC_9), LGUI(KC_0), LGUI(KC_D), KC_NO, SGUI(KC_1), SGUI(KC_2), SGUI(KC_3), SGUI(KC_4), SGUI(KC_5), SGUI(KC_6), SGUI(KC_7), SGUI(KC_8), SGUI(KC_9), SGUI(KC_0), LGUI(KC_MINS), KC_LSFT, LGUI(KC_F1), LGUI(KC_F2), LGUI(KC_F3), KC_NO, KC_NO, KC_NO, SGUI(KC_LEFT), SGUI(KC_RGHT), SGUI(KC_UP), SGUI(KC_DOWN), KC_ENT, KC_NO, KC_NO, LGUI(KC_W), LGUI(KC_E), KC_NO, KC_NO, LGUI(KC_LEFT), LGUI(KC_RGHT), LGUI(KC_UP), LGUI(KC_DOWN), KC_NO),
 	[4] = LAYOUT_planck_mit(LALT(KC_GRV), LALT(KC_1), LALT(KC_2), LALT(KC_3), LALT(KC_4), LALT(KC_5), LALT(KC_6), LALT(KC_7), LALT(KC_8), LALT(KC_9), LALT(KC_0), LALT(KC_F12), KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, LALT(KC_F7), LCA(KC_T), KC_NO, KC_NO, LALT(KC_ENT), KC_RSFT, KC_NO, KC_NO, LCA(KC_J), KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, HYPR(KC_F10), KC_NO, KC_NO, KC_NO, KC_NO, LCA(KC_INS), HYPR(KC_SPC), LALT(KC_INS), KC_NO, KC_NO, HYPR(KC_F5), KC_F5),
-	[5] = LAYOUT_planck_mit(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, RGB_SPI, RGB_VAI, RGB_SAI, RGB_HUI, RGB_MOD, RGB_TOG, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, RGB_SPD, RGB_VAD, RGB_SAD, RGB_HUD, RGB_RMOD, RESET, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, TG(0), KC_NO, KC_NO, KC_NO, KC_NO, KC_NO),
+	[5] = LAYOUT_planck_mit(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, BL_INC, RGB_SAI, RGB_HUI, RGB_MOD, BL_TOGG, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, BL_DEC, RGB_SAD, RGB_HUD, RGB_RMOD, RESET, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_SLEP, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO),
 	[6] = LAYOUT_planck_mit(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_7, KC_8, KC_9, KC_MINS, KC_BSPC, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_4, KC_5, KC_6, KC_EQL, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_1, KC_2, KC_3, KC_ASTR, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_0, KC_NO, KC_DOT, KC_SLSH, KC_PENT)
 };
 
