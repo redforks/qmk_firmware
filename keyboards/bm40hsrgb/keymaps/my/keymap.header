@@ -44,3 +44,77 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 };
 
+#define MY_HSV_WHITE 0, 0, 255
+#define MY_HSV_RED 0, 255, 255
+#define MY_HSV_CORAL 11, 176, 255
+#define MY_HSV_ORANGE 28, 255, 255
+#define MY_HSV_GOLDENROD 30, 218, 64
+#define MY_HSV_GOLD 36, 255, 72
+#define MY_HSV_YELLOW 43, 255, 72
+#define MY_HSV_CHARTREUSE 64, 255, 255
+#define MY_HSV_GREEN 85, 255, 127
+#define MY_HSV_SPRINGGREEN 106, 255, 255
+#define MY_HSV_TURQUOISE 123, 90, 112
+#define MY_HSV_TEAL 128, 255, 128
+#define MY_HSV_CYAN 128, 255, 255
+#define MY_HSV_AZURE 132, 102, 255
+#define MY_HSV_BLUE 170, 255, 255
+#define MY_HSV_PURPLE 191, 255, 255
+#define MY_HSV_MAGENTA 213, 255, 255
+#define MY_HSV_PINK 234, 128, 255
+
+const rgblight_segment_t PROGMEM my_layer0_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {13, 4, MY_HSV_GREEN},
+    {19, 4, MY_HSV_GREEN}
+);
+
+const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {1, 10, MY_HSV_GOLDENROD},
+    {13, 10, MY_HSV_GOLD}
+);
+
+const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {13, 1, HSV_OFF}
+);
+
+const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {13, 1, HSV_OFF}
+);
+
+const rgblight_segment_t PROGMEM my_layer6_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {7, 3, MY_HSV_GREEN},
+    {13, 4, HSV_OFF},
+    {19, 3, MY_HSV_GREEN},
+    {22, 1, HSV_OFF},
+    {31, 3, MY_HSV_GREEN},
+    {42, 1, MY_HSV_GREEN}
+);
+
+// Now define the array of layers. Later layers take precedence
+const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+    my_layer0_layer,
+    my_layer1_layer,
+    my_layer2_layer,
+    my_layer3_layer,
+    my_layer3_layer,
+    my_layer3_layer,
+    my_layer6_layer
+);
+
+void keyboard_post_init_user(void) {
+    // Enable the LED layers
+    rgblight_layers = my_rgb_layers;
+}
+ 
+layer_state_t default_layer_state_set_user(layer_state_t state) {
+    rgblight_set_layer_state(0, layer_state_cmp(state, 0));
+    return state;
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    rgblight_set_layer_state(1, layer_state_cmp(state, 1));
+    rgblight_set_layer_state(2, layer_state_cmp(state, 2));
+    rgblight_set_layer_state(6, layer_state_cmp(state, 6));
+    return state;
+}
+
