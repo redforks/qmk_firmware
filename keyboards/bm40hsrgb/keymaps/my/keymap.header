@@ -6,6 +6,7 @@ enum custom_keycodes {
     PHP_THIS,
     PHP_SELF,
     PHP_ARROW,
+    KENNER_DB,
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -37,6 +38,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case PHP_ARROW:
         if (record->event.pressed) {
             SEND_STRING("->");
+        }
+        break;
+
+    case KENNER_DB:
+        if (record->event.pressed) {
+            SEND_STRING("Kenner@root123");
         }
         break;
 
