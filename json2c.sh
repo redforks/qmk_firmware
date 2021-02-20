@@ -8,3 +8,4 @@ sed -i 's/HYPR(KC_T)/PHP_THIS/' ./keyboards/bm40hsrgb/keymaps/my/keymap.c
 sed -i 's/HYPR(KC_A)/PHP_ARROW/' ./keyboards/bm40hsrgb/keymaps/my/keymap.c
 sed -i 's/HYPR(KC_S)/PHP_SELF/' ./keyboards/bm40hsrgb/keymaps/my/keymap.c
 sed -i 's/HYPR(KC_K)/KENNER_DB/' ./keyboards/bm40hsrgb/keymaps/my/keymap.c
+sed -i 's/HYPR(KC_D)/KENNER_CRM/' ./keyboards/bm40hsrgb/keymaps/my/keymap.c
