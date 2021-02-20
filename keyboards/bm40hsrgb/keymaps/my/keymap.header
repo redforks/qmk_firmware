@@ -150,3 +150,75 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return state;
 }
 
+// Tap Dance declarations
+enum {
+    TD_PP,
+    TD_RR,
+    TD_FF,
+};
+
+void dance_pp_finished(qk_tap_dance_state_t *state, void *user_data) {
+    switch (state->count) {
+      case 1:
+        register_code(KC_P);
+        break;        
+      case 2:
+        SEND_STRING("private");
+        break;
+      case 3:
+        SEND_STRING("public");
+        break;
+      case 4:
+        SEND_STRING("protected");
+        break;
+    }
+}
+
+void dance_pp_reset(qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        unregister_code(KC_P);
+    }
+}
+
+void dance_rr_finished(qk_tap_dance_state_t *state, void *user_data) {
+    switch (state->count) {
+      case 1:
+        register_code(KC_R);
+        break;        
+      case 2:
+        SEND_STRING("return");
+        break;
+    }
+}
+
+void dance_rr_reset(qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        unregister_code(KC_R);
+    }
+}
+
+void dance_ff_finished(qk_tap_dance_state_t *state, void *user_data) {
+    switch (state->count) {
+      case 1:
+        register_code(KC_F);
+        break;        
+      case 2:
+        SEND_STRING("function");
+        break;
+    }
+}
+
+void dance_ff_reset(qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        unregister_code(KC_F);
+    }
+}
+
+
+// Tap Dance definitions
+qk_tap_dance_action_t tap_dance_actions[] = {
+    // Tap once for p, twice for 
+    [TD_PP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_pp_finished, dance_pp_reset),
+    [TD_RR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_rr_finished, dance_rr_reset),
+    [TD_FF] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_ff_finished, dance_ff_reset),
+};
