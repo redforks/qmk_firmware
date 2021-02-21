@@ -50,7 +50,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case KENNER_CRM:
         if (record->event.pressed) {
-            SEND_STRING("/home/tomcat/apache-tomcat-8.0.43//webapps/crm/");
+            SEND_STRING("/home/tomcat/apache-tomcat-8.0.43/webapps/crm/");
         }
         break;
 
@@ -152,31 +152,11 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 // Tap Dance declarations
 enum {
-    TD_RR,
     TD_SLASH,
 };
 
-void dance_rr_finished(qk_tap_dance_state_t *state, void *user_data) {
-    switch (state->count) {
-      case 1:
-        register_code(KC_R);
-        break;        
-      case 2:
-        SEND_STRING("return");
-        break;
-    }
-}
-
-void dance_rr_reset(qk_tap_dance_state_t *state, void *user_data) {
-    if (state->count == 1) {
-        unregister_code(KC_R);
-    }
-}
-
 // Tap Dance definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
-    // Tap once for p, twice for 
-    [TD_RR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_rr_finished, dance_rr_reset),
     [TD_SLASH] = ACTION_TAP_DANCE_DOUBLE(KC_SLSH, KC_BSLS),
 };
 
@@ -213,22 +193,29 @@ void matrix_scan_user(void) {
     SEQ_TWO_KEYS(KC_D, KC_D) {
       SEND_STRING("docker-compose down");
     }
+    SEQ_TWO_KEYS(KC_D, KC_E) {
+      SEND_STRING("docker-compose exec crm_sidekick bash");
+    }
 
     SEQ_TWO_KEYS(KC_S, KC_S) {
       SEND_STRING("ssh kenner");
     }
 
+    SEQ_ONE_KEY(KC_P) {
+      SEND_STRING("private ");
+    }
     SEQ_TWO_KEYS(KC_P, KC_P) {
-      SEND_STRING("private");
+      SEND_STRING("public ");
     }
     SEQ_THREE_KEYS(KC_P, KC_P, KC_P) {
-      SEND_STRING("public");
+      SEND_STRING("protected ");
     }
-    SEQ_FOUR_KEYS(KC_P, KC_P, KC_P, KC_P) {
-      SEND_STRING("protected");
+
+    SEQ_ONE_KEY(KC_F) {
+      SEND_STRING("function ");
     }
-    SEQ_TWO_KEYS(KC_F, KC_F) {
-      SEND_STRING("function");
+    SEQ_ONE_KEY(KC_R) {
+      SEND_STRING("return");
     }
   }
 }
