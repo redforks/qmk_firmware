@@ -155,6 +155,7 @@ enum {
     TD_PP,
     TD_RR,
     TD_FF,
+    TD_SLASH,
 };
 
 void dance_pp_finished(qk_tap_dance_state_t *state, void *user_data) {
@@ -221,4 +222,39 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_PP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_pp_finished, dance_pp_reset),
     [TD_RR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_rr_finished, dance_rr_reset),
     [TD_FF] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_ff_finished, dance_ff_reset),
+    [TD_SLASH] = ACTION_TAP_DANCE_DOUBLE(KC_SLSH, KC_BSLS),
 };
+
+LEADER_EXTERNS();
+
+void matrix_scan_user(void) {
+  LEADER_DICTIONARY() {
+    leading = false;
+    leader_end();
+
+    SEQ_TWO_KEYS(KC_E, KC_E) {
+      SEND_STRING(SS_TAP(X_END));
+    }
+    SEQ_TWO_KEYS(KC_E, KC_H) {
+      SEND_STRING(SS_TAP(X_HOME));
+    }
+    SEQ_TWO_KEYS(KC_G, KC_S) {
+      SEND_STRING("git flow feature start ");
+    }
+    SEQ_TWO_KEYS(KC_G, KC_F) {
+      SEND_STRING("git flow finish");
+    }
+    SEQ_TWO_KEYS(KC_D, KC_U) {
+      SEND_STRING("docker-compose up -d mysql redis beanstalkd crm crm_sidekick");
+    }
+    SEQ_TWO_KEYS(KC_D, KC_R) {
+      SEND_STRING("docker-compose restart crm");
+    }
+    SEQ_TWO_KEYS(KC_D, KC_D) {
+      SEND_STRING("docker-compose down");
+    }
+    SEQ_TWO_KEYS(KC_S, KC_S) {
+      SEND_STRING("ssh kenner");
+    }
+  }
+}

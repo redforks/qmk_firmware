@@ -155,6 +155,7 @@ enum {
     TD_PP,
     TD_RR,
     TD_FF,
+    TD_SLASH,
 };
 
 void dance_pp_finished(qk_tap_dance_state_t *state, void *user_data) {
@@ -221,7 +222,42 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_PP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_pp_finished, dance_pp_reset),
     [TD_RR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_rr_finished, dance_rr_reset),
     [TD_FF] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_ff_finished, dance_ff_reset),
+    [TD_SLASH] = ACTION_TAP_DANCE_DOUBLE(KC_SLSH, KC_BSLS),
 };
+
+LEADER_EXTERNS();
+
+void matrix_scan_user(void) {
+  LEADER_DICTIONARY() {
+    leading = false;
+    leader_end();
+
+    SEQ_TWO_KEYS(KC_E, KC_E) {
+      SEND_STRING(SS_TAP(X_END));
+    }
+    SEQ_TWO_KEYS(KC_E, KC_H) {
+      SEND_STRING(SS_TAP(X_HOME));
+    }
+    SEQ_TWO_KEYS(KC_G, KC_S) {
+      SEND_STRING("git flow feature start ");
+    }
+    SEQ_TWO_KEYS(KC_G, KC_F) {
+      SEND_STRING("git flow finish");
+    }
+    SEQ_TWO_KEYS(KC_D, KC_U) {
+      SEND_STRING("docker-compose up -d mysql redis beanstalkd crm crm_sidekick");
+    }
+    SEQ_TWO_KEYS(KC_D, KC_R) {
+      SEND_STRING("docker-compose restart crm");
+    }
+    SEQ_TWO_KEYS(KC_D, KC_D) {
+      SEND_STRING("docker-compose down");
+    }
+    SEQ_TWO_KEYS(KC_S, KC_S) {
+      SEND_STRING("ssh kenner");
+    }
+  }
+}
 
 /* THIS FILE WAS GENERATED!
  *
@@ -230,7 +266,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
  */
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-	[0] = LAYOUT_planck_mit(KC_SLSH, LT(5,KC_QUOT), KC_COMM, KC_DOT, TD(TD_PP), KC_Y, TD(TD_FF), KC_G, KC_C, TD(TD_RR), KC_L, KC_BSPC, KC_TAB, LGUI_T(KC_A), LALT_T(KC_O), LCTL_T(KC_E), LSFT_T(KC_U), KC_I, KC_D, RSFT_T(KC_H), LCTL_T(KC_T), LALT_T(KC_N), LGUI_T(KC_S), KC_MINS, KC_ESC, LT(6,KC_SCLN), KC_Q, KC_J, KC_K, KC_X, KC_B, KC_M, KC_W, KC_V, KC_Z, KC_ENT, MO(4), KC_NO, KC_NO, KC_LEAD, MO(2), LT(1,KC_SPC), MO(2), KC_NO, KC_CAPS, KC_NO, MO(3)),
+	[0] = LAYOUT_planck_mit(TD(TD_SLASH), LT(5,KC_QUOT), KC_COMM, KC_DOT, TD(TD_PP), KC_Y, TD(TD_FF), KC_G, KC_C, TD(TD_RR), KC_L, KC_BSPC, KC_TAB, LGUI_T(KC_A), LALT_T(KC_O), LCTL_T(KC_E), LSFT_T(KC_U), KC_I, KC_D, RSFT_T(KC_H), LCTL_T(KC_T), LALT_T(KC_N), LGUI_T(KC_S), KC_MINS, KC_ESC, LT(6,KC_SCLN), KC_Q, KC_J, KC_K, KC_X, KC_B, KC_M, KC_W, KC_V, KC_Z, KC_ENT, MO(4), KC_NO, KC_NO, KC_LEAD, MO(2), LT(1,KC_SPC), MO(2), KC_NO, KC_CAPS, KC_NO, MO(3)),
 	[1] = LAYOUT_planck_mit(KC_GRV, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_DEL, KC_TILD, KC_EXLM, KC_AT, KC_HASH, KC_DLR, KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_NO, KC_NO, KC_RCBR, KC_LCBR, KC_RBRC, KC_LBRC, KC_EQL, KC_BSLS, KC_PLUS, KC_PIPE, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS, KC_NO, KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO),
 	[2] = LAYOUT_planck_mit(KC_LALT, KC_F1, KC_F2, KC_F3, KC_F4, PHP_SELF, KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_WH_U, KC_NO, KC_RCTL, KC_F5, KC_F6, KC_F7, KC_F8, PHP_THIS, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_WH_D, KC_NO, KC_RSFT, KC_F9, KC_F10, KC_F11, KC_F12, PHP_ARROW, KENNER_DB, VIM_YANK, VIM_PASTE, KC_DEL, KC_INS, KC_RSFT, KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS, KC_NO, KC_TRNS, KC_NO, KC_NO, KENNER_CRM, KC_RCTL),
 	[3] = LAYOUT_planck_mit(SGUI(KC_Q), LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5), LGUI(KC_6), LGUI(KC_7), LGUI(KC_8), LGUI(KC_9), LGUI(KC_0), LGUI(KC_D), KC_NO, SGUI(KC_1), SGUI(KC_2), SGUI(KC_3), SGUI(KC_4), SGUI(KC_5), SGUI(KC_6), SGUI(KC_7), SGUI(KC_8), SGUI(KC_9), SGUI(KC_0), LGUI(KC_MINS), KC_LSFT, LGUI(KC_F1), LGUI(KC_F2), LGUI(KC_F3), KC_NO, KC_NO, KC_NO, SGUI(KC_LEFT), SGUI(KC_RGHT), SGUI(KC_UP), SGUI(KC_DOWN), KC_ENT, KC_NO, KC_NO, LGUI(KC_W), LGUI(KC_E), KC_NO, KC_NO, LGUI(KC_LEFT), LGUI(KC_RGHT), LGUI(KC_UP), LGUI(KC_DOWN), KC_NO),
