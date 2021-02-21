@@ -238,12 +238,17 @@ void matrix_scan_user(void) {
     SEQ_TWO_KEYS(KC_E, KC_H) {
       SEND_STRING(SS_TAP(X_HOME));
     }
+
     SEQ_TWO_KEYS(KC_G, KC_S) {
       SEND_STRING("git flow feature start ");
     }
     SEQ_TWO_KEYS(KC_G, KC_F) {
       SEND_STRING("git flow finish");
     }
+    SEQ_TWO_KEYS(KC_G, KC_P) {
+      SEND_STRING("git push");
+    }
+
     SEQ_TWO_KEYS(KC_D, KC_U) {
       SEND_STRING("docker-compose up -d mysql redis beanstalkd crm crm_sidekick");
     }
@@ -253,6 +258,7 @@ void matrix_scan_user(void) {
     SEQ_TWO_KEYS(KC_D, KC_D) {
       SEND_STRING("docker-compose down");
     }
+
     SEQ_TWO_KEYS(KC_S, KC_S) {
       SEND_STRING("ssh kenner");
     }
