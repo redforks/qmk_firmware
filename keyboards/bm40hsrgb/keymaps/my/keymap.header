@@ -163,6 +163,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 LEADER_EXTERNS();
 
 void matrix_scan_user(void) {
+  set_unicode_input_mode(UNICODE_SELECTED_MODES);
+
   LEADER_DICTIONARY() {
     leading = false;
     leader_end();
@@ -216,6 +218,12 @@ void matrix_scan_user(void) {
     }
     SEQ_ONE_KEY(KC_R) {
       SEND_STRING("return");
+    }
+
+    SEQ_TWO_KEYS(KC_N, KC_N) {
+      unicode_input_start();
+      send_unicode_string("好的");
+      unicode_input_finish();
     }
   }
 }

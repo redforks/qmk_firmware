@@ -25,6 +25,8 @@ DEBOUNCE_TYPE = sym_defer_pk
 RGBLIGHT_ENABLE = yes
 TAP_DANCE_ENABLE = yes
 LEADER_ENABLE = yes
+UNICODE_ENABLE = yes
 
 LAYOUTS = planck_mit
 LAYOUTS_HAS_RGB = yes
+
