@@ -213,6 +213,26 @@ void matrix_scan_user(void) {
       SEND_STRING("protected ");
     }
 
+    SEQ_ONE_KEY(KC_I) {
+      SEND_STRING("Interface");
+    }
+    SEQ_TWO_KEYS(KC_I, KC_I) {
+      SEND_STRING("interface");
+    }
+
+    SEQ_TWO_KEYS(KC_O, KC_P) {
+      SEND_STRING("@param ");
+    }
+    SEQ_TWO_KEYS(KC_O, KC_R) {
+      SEND_STRING("@return ");
+    }
+    SEQ_TWO_KEYS(KC_O, KC_I) {
+      SEND_STRING("@implements ");
+    }
+    SEQ_TWO_KEYS(KC_O, KC_E) {
+      SEND_STRING("@extends ");
+    }
+
     SEQ_ONE_KEY(KC_F) {
       SEND_STRING("function ");
     }
