@@ -225,6 +225,16 @@ void matrix_scan_user(void) {
       send_unicode_string("好的");
       unicode_input_finish();
     }
+    SEQ_TWO_KEYS(KC_N, KC_W) {
+      unicode_input_start();
+      send_unicode_string("我看看，稍等");
+      unicode_input_finish();
+    }
+    SEQ_TWO_KEYS(KC_N, KC_D) {
+      unicode_input_start();
+      send_unicode_string("处理了，麻烦再试试");
+      unicode_input_finish();
+    }
   }
 }
 
