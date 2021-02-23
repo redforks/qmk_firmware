@@ -198,7 +198,10 @@ void matrix_scan_user(void) {
     SEQ_TWO_KEYS(KC_D, KC_E) {
       SEND_STRING("docker-compose exec crm_sidekick bash");
     }
-
+   
+    SEQ_ONE_KEY(KC_S) {
+      SEND_STRING("string ");
+    }
     SEQ_TWO_KEYS(KC_S, KC_S) {
       SEND_STRING("ssh kenner");
     }
