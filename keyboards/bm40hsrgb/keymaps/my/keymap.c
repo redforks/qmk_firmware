@@ -232,6 +232,9 @@ void matrix_scan_user(void) {
     SEQ_TWO_KEYS(KC_O, KC_E) {
       SEND_STRING("@extends ");
     }
+    SEQ_TWO_KEYS(KC_O, KC_T) {
+      SEND_STRING("@template T");
+    }
 
     SEQ_ONE_KEY(KC_F) {
       SEND_STRING("function ");
