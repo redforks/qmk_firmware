@@ -243,7 +243,7 @@ void matrix_scan_user(void) {
       SEND_STRING("function ");
     }
     SEQ_ONE_KEY(KC_R) {
-      SEND_STRING("return");
+      SEND_STRING("return ");
     }
 
     SEQ_ONE_KEY(KC_A) {
