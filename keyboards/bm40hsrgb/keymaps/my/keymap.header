@@ -246,6 +246,17 @@ void matrix_scan_user(void) {
       SEND_STRING("return");
     }
 
+    SEQ_ONE_KEY(KC_A) {
+      SEND_STRING("array $");
+    }
+
+    SEQ_ONE_KEY(KC_C) {
+      SEND_STRING("create");
+    }
+
+    SEQ_ONE_KEY(KC_N) {
+      SEND_STRING("new ");
+    }
     SEQ_TWO_KEYS(KC_N, KC_N) {
       unicode_input_start();
       send_unicode_string("好的");
