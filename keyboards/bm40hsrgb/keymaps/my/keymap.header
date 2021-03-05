@@ -59,6 +59,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 };
 
 #define MY_HSV_WHITE 0, 0, 255
+#define MY_HSV_GRAY 0, 0, 128
 #define MY_HSV_RED 0, 255, 255
 #define MY_HSV_CORAL 11, 176, 255
 #define MY_HSV_ORANGE 28, 255, 255
@@ -76,10 +77,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #define MY_HSV_PURPLE 191, 255, 255
 #define MY_HSV_MAGENTA 213, 255, 255
 #define MY_HSV_PINK 234, 128, 255
-
-const rgblight_segment_t PROGMEM cap_lock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {44, 1, MY_HSV_AZURE}
-);
 
 const rgblight_segment_t PROGMEM my_layer0_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {13, 4, MY_HSV_GREEN},
@@ -115,6 +112,22 @@ const rgblight_segment_t PROGMEM my_layer6_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {42, 1, MY_HSV_GREEN}
 );
 
+const rgblight_segment_t PROGMEM my_layer7_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {13, 4, HSV_OFF},
+    {7, 1, MY_HSV_YELLOW},
+    {8, 1, MY_HSV_TURQUOISE},
+    {9, 1, MY_HSV_YELLOW},
+    {19, 3, MY_HSV_TURQUOISE},
+    {22, 1, MY_HSV_YELLOW},
+    {32, 1, MY_HSV_SPRINGGREEN},
+    {37, 1, MY_HSV_GRAY},
+    {42, 3, MY_HSV_SPRINGGREEN}
+);
+
+const rgblight_segment_t PROGMEM cap_lock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {44, 1, MY_HSV_AZURE}
+);
+
 // Now define the array of layers. Later layers take precedence
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
     my_layer0_layer,
@@ -124,6 +137,7 @@ const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
     my_layer3_layer,
     my_layer5_layer,
     my_layer6_layer,
+    my_layer7_layer,
     cap_lock_layer
 );
 
@@ -133,7 +147,7 @@ void keyboard_post_init_user(void) {
 }
 
 bool led_update_user(led_t led_state) {
-    rgblight_set_layer_state(7, led_state.caps_lock);
+    rgblight_set_layer_state(8, led_state.caps_lock);
     return true;
 }
  
@@ -147,6 +161,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(2, layer_state_cmp(state, 2));
     rgblight_set_layer_state(5, layer_state_cmp(state, 5));
     rgblight_set_layer_state(6, layer_state_cmp(state, 6));
+    rgblight_set_layer_state(7, layer_state_cmp(state, 7));
     return state;
 }
 
