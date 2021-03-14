@@ -1,0 +1,202 @@
+#include QMK_KEYBOARD_H
+
+enum custom_keycodes {
+    VIM_YANK = SAFE_RANGE,
+    VIM_PASTE,
+    PHP_THIS,
+    PHP_SELF,
+    PHP_ARROW,
+    KENNER_DB,
+    KENNER_CRM
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    case VIM_YANK:
+        if (record->event.pressed) {
+            SEND_STRING("\"+y");
+        }
+        break;
+
+    case VIM_PASTE:
+        if (record->event.pressed) {
+            SEND_STRING("\"+p");
+        }
+        break;
+
+    case PHP_THIS:
+        if (record->event.pressed) {
+            SEND_STRING("$this->");
+        }
+        break;
+
+    case PHP_SELF:
+        if (record->event.pressed) {
+            SEND_STRING("self::");
+        }
+        break;
+
+    case PHP_ARROW:
+        if (record->event.pressed) {
+            SEND_STRING("->");
+        }
+        break;
+
+    case KENNER_DB:
+        if (record->event.pressed) {
+            SEND_STRING("Kenner@root123");
+        }
+        break;
+
+    case KENNER_CRM:
+        if (record->event.pressed) {
+            SEND_STRING("/home/tomcat/apache-tomcat-8.0.43/webapps/crm/");
+        }
+        break;
+
+    }
+    return true;
+};
+
+LEADER_EXTERNS();
+
+void matrix_scan_user(void) {
+  set_unicode_input_mode(UNICODE_SELECTED_MODES);
+
+  uint8_t layer = biton32(layer_state);
+
+  ergodox_board_led_off();
+  ergodox_right_led_1_off();
+  ergodox_right_led_2_off();
+  ergodox_right_led_3_off();
+  switch (layer) {
+    // TODO: Make this relevant to the ErgoDox EZ.
+      case 1:
+          ergodox_right_led_1_on();
+          break;
+      case 2:
+          ergodox_right_led_2_on();
+          break;
+      case 3:
+          ergodox_right_led_3_on();
+          break;
+      default:
+          // none
+          break;
+  }
+
+  if (host_keyboard_leds() & (1<<USB_LED_CAPS_LOCK)) {
+      ergodox_right_led_1_on();
+      ergodox_right_led_2_on();
+      ergodox_right_led_3_on();
+  }
+
+  LEADER_DICTIONARY() {
+    leading = false;
+    leader_end();
+
+    SEQ_TWO_KEYS(KC_E, KC_E) {
+      SEND_STRING(SS_TAP(X_END));
+    }
+    SEQ_TWO_KEYS(KC_E, KC_H) {
+      SEND_STRING(SS_TAP(X_HOME));
+    }
+
+    SEQ_TWO_KEYS(KC_G, KC_S) {
+      SEND_STRING("git flow feature start ");
+    }
+    SEQ_TWO_KEYS(KC_G, KC_F) {
+      SEND_STRING("git flow finish");
+    }
+    SEQ_TWO_KEYS(KC_G, KC_P) {
+      SEND_STRING("git push");
+    }
+
+    SEQ_TWO_KEYS(KC_D, KC_U) {
+      SEND_STRING("docker-compose up -d mysql redis beanstalkd crm crm_sidekick");
+    }
+    SEQ_TWO_KEYS(KC_D, KC_R) {
+      SEND_STRING("docker-compose restart crm");
+    }
+    SEQ_TWO_KEYS(KC_D, KC_D) {
+      SEND_STRING("docker-compose down");
+    }
+    SEQ_TWO_KEYS(KC_D, KC_E) {
+      SEND_STRING("docker-compose exec crm_sidekick bash");
+    }
+   
+    SEQ_ONE_KEY(KC_S) {
+      SEND_STRING("string ");
+    }
+    SEQ_TWO_KEYS(KC_S, KC_S) {
+      SEND_STRING("ssh kenner");
+    }
+
+    SEQ_ONE_KEY(KC_P) {
+      SEND_STRING("private ");
+    }
+    SEQ_TWO_KEYS(KC_P, KC_P) {
+      SEND_STRING("public ");
+    }
+    SEQ_THREE_KEYS(KC_P, KC_P, KC_P) {
+      SEND_STRING("protected ");
+    }
+
+    SEQ_ONE_KEY(KC_I) {
+      SEND_STRING("Interface");
+    }
+    SEQ_TWO_KEYS(KC_I, KC_I) {
+      SEND_STRING("interface");
+    }
+
+    SEQ_TWO_KEYS(KC_O, KC_P) {
+      SEND_STRING("@param ");
+    }
+    SEQ_TWO_KEYS(KC_O, KC_R) {
+      SEND_STRING("@return ");
+    }
+    SEQ_TWO_KEYS(KC_O, KC_I) {
+      SEND_STRING("@implements ");
+    }
+    SEQ_TWO_KEYS(KC_O, KC_E) {
+      SEND_STRING("@extends ");
+    }
+    SEQ_TWO_KEYS(KC_O, KC_T) {
+      SEND_STRING("@template T");
+    }
+
+    SEQ_ONE_KEY(KC_F) {
+      SEND_STRING("function ");
+    }
+    SEQ_ONE_KEY(KC_R) {
+      SEND_STRING("return ");
+    }
+
+    SEQ_ONE_KEY(KC_A) {
+      SEND_STRING("array $");
+    }
+
+    SEQ_ONE_KEY(KC_C) {
+      SEND_STRING("create");
+    }
+
+    SEQ_ONE_KEY(KC_N) {
+      SEND_STRING("new ");
+    }
+    SEQ_TWO_KEYS(KC_N, KC_N) {
+      unicode_input_start();
+      send_unicode_string("好的");
+      unicode_input_finish();
+    }
+    SEQ_TWO_KEYS(KC_N, KC_W) {
+      unicode_input_start();
+      send_unicode_string("我看看，稍等");
+      unicode_input_finish();
+    }
+    SEQ_TWO_KEYS(KC_N, KC_D) {
+      unicode_input_start();
+      send_unicode_string("处理了，麻烦再试试");
+      unicode_input_finish();
+    }
+  }
+}

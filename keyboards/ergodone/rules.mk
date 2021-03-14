@@ -28,6 +28,8 @@ BACKLIGHT_ENABLE        = no	# Enable keyboard backlight functionality
 SWAP_HANDS_ENABLE       = no  # Disable Onehand
 RGBLIGHT_ENABLE         = no
 MIDI_ENABLE             = no
+LEADER_ENABLE = yes
+DYNAMIC_MACRO_ENABLE = yes
 
 # project specific files
 SRC = \
