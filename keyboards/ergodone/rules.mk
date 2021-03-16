@@ -30,6 +30,7 @@ RGBLIGHT_ENABLE         = no
 MIDI_ENABLE             = no
 LEADER_ENABLE = yes
 DYNAMIC_MACRO_ENABLE = yes
+KEY_LOCK_ENABLE = no
 
 # project specific files
 SRC = \
