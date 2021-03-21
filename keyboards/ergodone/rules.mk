@@ -31,6 +31,7 @@ MIDI_ENABLE             = no
 LEADER_ENABLE = yes
 DYNAMIC_MACRO_ENABLE = yes
 KEY_LOCK_ENABLE = no
+LTO_ENABLE = yes
 
 # project specific files
 SRC = \
